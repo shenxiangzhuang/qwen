@@ -4,7 +4,6 @@
 # SPDX-FileCopyrightText: 2023 Marco Gallo
 # SPDX-License-Identifier: MIT
 
-
 defmodule Qwen.Config do
   @moduledoc """
   Reads configuration on application start, parses all environment variables (if any)
@@ -46,5 +45,4 @@ defmodule Qwen.Config do
   end
 
   defp parse_config_value(value), do: value
-
 end

@@ -2,7 +2,7 @@ defmodule Qwen.MixProject do
   use Mix.Project
 
   @version "0.1.0"
-  @description "通义千问大语言模型REST API封装"
+  @description "Elixir ❤️ 通义千问"
 
   def project do
     [
@@ -51,5 +51,4 @@ defmodule Qwen.MixProject do
       links: %{"GitHub" => "https://github.com/shenxiangzhuang/qwen"}
     }
   end
-
 end
