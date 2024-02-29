@@ -11,7 +11,10 @@ params = [
               content: "你是唐代诗人李白，请做一首诗评价一下意大利作家卡尔维诺"
           }
       ]
-    }
+    },
+  parameters: %{
+    result_format: "message"
+  }
 ]
 
-QWen.generation(params, %Qwen.Config{})
+Qwen.generation(params, %Qwen.Config{})

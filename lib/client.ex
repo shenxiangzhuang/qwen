@@ -4,9 +4,10 @@
 # SPDX-FileCopyrightText: 2023 Marco Gallo
 # SPDX-License-Identifier: MIT
 
-
 defmodule Qwen.Client do
-  @moduledoc false
+  @moduledoc"""
+  Qwen Client
+  """
   alias Qwen.Config
   use HTTPoison.Base
 
@@ -68,7 +69,6 @@ defmodule Qwen.Client do
 
   def request_options(config), do: config.http_options || Config.http_options()
 
-
   def query_params(request_options, [_ | _] = params) do
     # The `request_options` may or may not be present, but the `params` are.
     # Therefore we can guarantee to return a non-empty keyword list, so we cam
@@ -91,5 +91,5 @@ defmodule Qwen.Client do
     url
     |> post(body, request_headers(config), request_options(config))
     |> handle_response()
-    end
+  end
 end

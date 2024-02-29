@@ -51,5 +51,4 @@ defmodule Qwen.MixProject do
       links: %{"GitHub" => "https://github.com/shenxiangzhuang/qwen"}
     }
   end
-
 end

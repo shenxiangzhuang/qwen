@@ -6,8 +6,7 @@
 
 
 ## 安装
-
-后续会发不到[Hex](https://hex.pm/docs/publish), 
+后续会发布到[https://hexdocs.pm/qwen](https://hexdocs.pm/qwen)，
 可以在`mix.exs`添加`qwen`来安装:
 
 ```elixir
@@ -23,7 +22,7 @@ end
 [https://hexdocs.pm/qwen](https://hexdocs.pm/qwen)
 
 
-## Acknowledgments(致谢)
+## 致谢
 
 The implementation is highly inspired by 
 [openai.ex](https://github.com/mgallo/openai.ex) and 
