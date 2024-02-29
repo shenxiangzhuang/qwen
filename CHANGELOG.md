@@ -7,5 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+
+## [0.1.0] - 2024-02-29
+
 ### Added
-- 增加通义千问大语言模型
+- 增加通义千问大语言模型[文本生成功能](https://help.aliyun.com/zh/dashscope/developer-reference/quick-start)的封装

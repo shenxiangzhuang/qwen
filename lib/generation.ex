@@ -92,14 +92,12 @@ defmodule Qwen.Generation do
   defp parse_chat({:ok, %{output: %{"text" => text_content}}}),
     do: {:ok, text_content}
 
-  @doc """
-  解析异常返回，示例如下
-  {
-    "code":"InvalidApiKey",
-    "message":"Invalid API-key provided.",
-    "request_id":"fb53c4ec-1c12-4fc4-a580-cdb7c3261fc1"
-  }
-  """
+  # 解析异常返回，示例如下
+  # {
+  #   "code":"InvalidApiKey",
+  #   "message":"Invalid API-key provided.",
+  #   "request_id":"fb53c4ec-1c12-4fc4-a580-cdb7c3261fc1"
+  # }
   defp parse_chat({:error, %{"message" => message}}), do: {:error, message}
 
   # 解析其他异常返回
@@ -157,7 +155,6 @@ defmodule Qwen.Generation do
     parameters: %{result_format: "message"}
   ]
   ```
-
   """
   def sigil_l(lines, _opts) do
     lines |> text_to_prompts()
