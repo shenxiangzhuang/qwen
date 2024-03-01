@@ -106,5 +106,4 @@ defmodule Qwen.Client do
     |> get(request_headers(config), request_options)
     |> handle_response()
   end
-
 end
