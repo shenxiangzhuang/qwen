@@ -22,14 +22,14 @@ defmodule Qwen.Image do
     |> Client.api_post(params, config, dynamic_headers)
   end
 
-  def get_task_status(params, config \\ %Config{}, task_id_string) do
+  def get_task_status(params \\ [], config \\ %Config{}, task_id_string) do
     (get_url() <> "/" <> task_id_string)
     |> Client.api_get(params, config)
     |> parse_image_url()
   end
 
   def image_generation(params, config \\ %Config{}) do
-    # TODO: parse task_id and query status until success or fail
+    # parse task_id and query status until success or fail
     post_async_generation_task(params, config)
     |> parse_task_id()
     |> get_task_status()
