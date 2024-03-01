@@ -4,7 +4,7 @@ defmodule Qwen do
   """
   alias Qwen.Config
   alias Qwen.Generation
-  import Qwen.Generation, only: :sigils
+  import Qwen.Sigils, only: :sigils
 
   @doc """
   通义千问大语言模型: 输入prompt，输出生成结果。
@@ -25,7 +25,7 @@ defmodule Qwen do
   ## 一般用法
 
   ```elixir
-  iex> import Qwen.Generation
+  iex> import Qwen.Sigils
   iex> prompt = ~l"model: qwen-turbo system: 你是一个学贯中西，通晓古今的文学家，给定一些历史上的文人，你能够根据这些人物的特征给出符合人物形象的对话。user: 你是唐代诗人李白，请做一首诗评价一下意大利作家卡尔维诺"
   iex> Qwen.chat(prompt)
   {:ok,

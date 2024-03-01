@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: MIT
 
 defmodule Qwen.Client do
-  @moduledoc"""
+  @moduledoc """
   Qwen Client
   """
   alias Qwen.Config
@@ -58,11 +58,14 @@ defmodule Qwen.Client do
     end
   end
 
-  def request_headers(config) do
-    [
-      bearer(config),
-      {"Content-type", "application/json"}
-    ]
+  def request_headers(config, dynamic_headers \\ []) do
+    headers =
+      [
+        bearer(config),
+        {"Content-type", "application/json"}
+      ]
+
+    headers ++ dynamic_headers
   end
 
   def bearer(config), do: {"Authorization", "Bearer #{config.api_key || Config.api_key()}"}
@@ -82,14 +85,26 @@ defmodule Qwen.Client do
 
   def query_params(request_options, _params), do: request_options
 
-  def api_post(url, params \\ [], config) do
+  def api_post(url, params \\ [], config, dynamic_headers \\ []) do
     body =
       params
       |> Enum.into(%{})
       |> Jason.encode!()
 
     url
-    |> post(body, request_headers(config), request_options(config))
+    |> post(body, request_headers(config, dynamic_headers), request_options(config))
     |> handle_response()
   end
+
+  def api_get(url, params \\ [], config) do
+    request_options =
+      config
+      |> request_options()
+      |> query_params(params)
+
+    url
+    |> get(request_headers(config), request_options)
+    |> handle_response()
+  end
+
 end

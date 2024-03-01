@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- 增加`sigil_p`用于文生图的字符模版解析
+
+
+### Changed
+- `sigil_l`从`Qwen.Generation`迁移到`Qwen.Sigils`
 
 
 ## [0.1.0] - 2024-02-29
