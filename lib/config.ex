@@ -16,8 +16,6 @@ defmodule Qwen.Config do
 
   @qwen_url "https://dashscope.aliyuncs.com"
 
-  def start_link(opts), do: GenServer.start_link(__MODULE__, opts, name: __MODULE__)
-
   # API Key
   def api_key, do: get_config_value(:api_key, System.get_env("DASHSCOPE_API_KEY"))
 
