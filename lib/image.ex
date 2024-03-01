@@ -22,8 +22,8 @@ defmodule Qwen.Image do
     |> Client.api_post(params, config, dynamic_headers)
   end
 
-  def get_task_status(params, config \\ %Config{}, task_id) do
-    get_url() <> "/" <> Integer.to_string(task_id)
+  def get_task_status(params, config \\ %Config{}, task_id_string) do
+    get_url() <> "/" <> task_id_string
     |> Client.api_get(params, config)
   end
 
