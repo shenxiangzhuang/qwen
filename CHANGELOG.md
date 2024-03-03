@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.2.0] - 2024-03-03
+
 ### Added
 - 新增`Qwen.text_to_image`用于通义万相文生图模型的调用
 - 新增`sigil_p`用于文生图的字符模版解析
