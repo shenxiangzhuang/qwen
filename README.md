@@ -1,4 +1,8 @@
 # Qwen(千问)
+[![Hex.pm Version](https://img.shields.io/hexpm/v/qwen)](https://hex.pm/packages/qwen)
+[![Hex.pm Download Total](https://img.shields.io/hexpm/dt/qwen)](https://hex.pm/packages/qwen)
+[![Elixir CI](https://github.com/shenxiangzhuang/qwen/actions/workflows/elixir.yml/badge.svg?branch=master)](https://github.com/shenxiangzhuang/qwen/actions/workflows/elixir.yml)
+
 
 对通义千问REST API
 ([API详情](https://help.aliyun.com/zh/dashscope/developer-reference/api-details))
