@@ -67,8 +67,10 @@ Save image to ./旅夜书怀.png
 {:ok, "./旅夜书怀.png"}
 
 ```
-![](./asset/旅夜书怀.png)
 
+<p align="center">
+  <img src="./asset/旅夜书怀.png" alt="旅夜书怀" width="600" height="400">
+</p>
 
 ## 致谢
 
