@@ -2,7 +2,6 @@ defmodule Qwen.Image do
   @moduledoc """
   Qwen Generation
   """
-  alias Erl2exVendored.Cli
   alias Qwen.Client
   alias Qwen.Config
 
