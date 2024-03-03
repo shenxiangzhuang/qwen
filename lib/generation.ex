@@ -6,7 +6,7 @@
 
 defmodule Qwen.Generation do
   @moduledoc """
-  Qwen Generation
+  通义千问大语言模型
   """
   alias Qwen.Client
   alias Qwen.Config
@@ -28,16 +28,13 @@ defmodule Qwen.Generation do
     |> Client.api_post(params, config)
   end
 
-  def generation(params, config \\ %Config{}) do
-    fetch(params, config)
-  end
-
   @doc """
   将通义千问大语言模型的对话结果解析为更加精简的格式，
   返回`{:ok, text_content}` 或 `{:error, message}`，而不是原始格式
 
   ## 精简格式(默认)
   ```elixir
+  iex> import Qwen.Sigils
   iex> prompt = ~l"model: qwen-turbo system: 你是一个学贯中西，通晓古今的文学家，给定一些历史上的文人，你能够根据这些人物的特征给出符合人物形象的对话。user: 你是唐代诗人李白，请做一首诗评价一下意大利作家卡尔维诺"
   [
     model: "qwen-turbo",
@@ -81,6 +78,62 @@ defmodule Qwen.Generation do
     text
     |> generation()
     |> parse_chat()
+  end
+
+  @doc """
+  通义千问大语言模型(原始接口): 输入原始格式参数，输出原始格式结果
+
+
+  ## 请求参数
+  ```elixir
+  params = [
+    model: "qwen-turbo",
+    input: %{
+        messages: [
+            %{
+                role: "system",
+                content: "你是一个学贯中西，通晓古今的文学家，给定一些历史上的文人，你能够根据这些人物的特征给出符合人物形象的对话"
+            },
+            %{
+                role: "user",
+                content: "你是唐代诗人李白，请做一首诗评价一下意大利作家卡尔维诺"
+            }
+        ]
+      },
+    parameters: %{
+      result_format: "message"
+    }
+  ]
+  ```
+
+  ## 发起请求
+  ```elixir
+  Qwen.generation(params, %Qwen.Config{})
+  ```
+
+  ## 请求响应
+
+  ```elixir
+  {:ok,
+    %{
+      output: %{
+        "choices" => [
+          %{
+            "finish_reason" => "stop",
+            "message" => %{
+              "content" => "吾乃大唐诗仙李太白，异国文豪未识面，\n卡尔维诺名震欧罗巴，笔下世界幻如烟。\n《看不见的城市》藏深意，文字游戏人间篇，\n穿越时空织锦绣，如我醉酒舞剑篇。\n\n天马行空思绪远，寓言之中见哲理，\n与我青天揽明月，皆是诗心照万里。\n虽隔千山与万水，文学之心共通灵，\n愿尔作品长流传，犹如长江水东流。",
+              "role" => "assistant"
+            }
+          }
+        ]
+      },
+      usage: %{"input_tokens" => 63, "output_tokens" => 114, "total_tokens" => 177},
+      request_id: "558791e3-dcbe-95d5-bbad-1b2fe3c2f6cf"
+    }}
+  ```
+  """
+  def generation(params, config \\ %Config{}) do
+    fetch(params, config)
   end
 
   defp parse_chat(

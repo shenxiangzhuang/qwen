@@ -1,6 +1,6 @@
 defmodule Qwen.Image do
   @moduledoc """
-  Qwen Generation
+  通义万相: 文生图模型
   """
   alias Qwen.Client
   alias Qwen.Config
@@ -10,6 +10,18 @@ defmodule Qwen.Image do
 
   def post_url(), do: @post_url
   def get_url(), do: @get_url
+
+  def text_to_image(text, image_path) do
+    text |> image_generation(image_path)
+  end
+
+  def image_generation(params, image_path, config \\ %Config{}) do
+    # params -> task_id -> image_url
+    post_async_generation_task(params, config)
+    |> parse_task_id()
+    |> get_task_status()
+    |> save_image(image_path)
+  end
 
   def post_async_generation_task(params, config \\ %Config{}) do
     # 固定使用 enable，表明使用异步方式提交作业(文档要求必须使用异步方式)
@@ -27,13 +39,6 @@ defmodule Qwen.Image do
     |> parse_image_url()
   end
 
-  def image_generation(params, config \\ %Config{}) do
-    # parse task_id and query status until success or fail
-    post_async_generation_task(params, config)
-    |> parse_task_id()
-    |> get_task_status()
-  end
-
   def parse_task_id({:ok, %{output: %{"task_id" => task_id}}}) do
     task_id
   end
@@ -47,12 +52,12 @@ defmodule Qwen.Image do
        ) do
     case task_status do
       "PENDING" ->
-        IO.puts("pending...")
+        IO.puts("Pending...")
         :timer.sleep(5000)
         get_task_status(task_id)
 
       "RUNNING" ->
-        IO.puts("running...")
+        IO.puts("Running...")
         :timer.sleep(3000)
         get_task_status(task_id)
 
@@ -67,5 +72,9 @@ defmodule Qwen.Image do
 
   defp parse_image_url({:error, _} = raw_resp) do
     raw_resp
+  end
+
+  def save_image({:ok, image_url}, image_path) do
+    Client.image_download(image_url, image_path)
   end
 end

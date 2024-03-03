@@ -1,7 +1,6 @@
 import Qwen.Sigils
-alias Qwen.Image
 
 
-image_prompt = ~p"model: wanx-v1 prompt: 一只奔跑的猫 parameters.style: <chinese painting> parameters.size: 1024*1024 parameters.n: 1 parameters.seed: 42"
-task_id = image_prompt |> Image.post_async_generation_task |> Image.parse_task_id
-image_url = task_id |> Image.get_task_status
+image_prompt = ~p"model: wanx-v1 prompt: 根据杜甫的《旅夜书怀》做一副富有意境和想象力的画 parameters.style: <chinese painting> parameters.size: 1024*1024 parameters.n: 1 parameters.seed: 42"
+
+Qwen.text_to_image(image_prompt, "./旅夜书怀.png")

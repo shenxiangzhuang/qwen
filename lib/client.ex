@@ -106,4 +106,18 @@ defmodule Qwen.Client do
     |> get(request_headers(config), request_options)
     |> handle_response()
   end
+
+  def image_download(image_url, image_path) do
+    %HTTPoison.Response{body: body} = HTTPoison.get!(image_url)
+
+    # Save the image data to the file path
+    case File.write!(image_path, body) do
+      :ok ->
+        IO.puts("Save image to #{image_path}")
+        {:ok, image_path}
+
+      {:error, reason} ->
+        {:error, reason}
+    end
+  end
 end
