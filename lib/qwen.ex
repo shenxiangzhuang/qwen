@@ -57,5 +57,4 @@ defmodule Qwen do
   def text_to_image(text, image_path \\ "./qwen.png") do
     Image.text_to_image(text, image_path)
   end
-
 end
