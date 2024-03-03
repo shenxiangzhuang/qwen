@@ -65,16 +65,6 @@ defmodule Qwen.Image do
     end
   end
 
-  # defp parse_image_url(
-  #        {:ok,
-  #         %{output: %{"results" => [%{"url" => image_url} | _], "task_status" => task_status}}} = resp
-  #      ) do
-  #       case task_status do
-  #         "SUCCEEDED" -> {:ok, image_url}
-  #         _ -> {:error, resp}
-  #       end
-  # end
-
   defp parse_image_url({:error, _} = raw_resp) do
     raw_resp
   end
