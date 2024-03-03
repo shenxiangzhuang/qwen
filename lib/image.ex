@@ -43,27 +43,38 @@ defmodule Qwen.Image do
     raw_resp
   end
 
-
   defp parse_image_url(
-         {:ok,
-          %{output: %{"task_status" => task_status, "task_id" => task_id}}} = resp
+         {:ok, %{output: %{"task_status" => task_status, "task_id" => task_id}}} = resp
        ) do
-        case task_status do
-          "PENDING" -> IO.puts("pending..."); :timer.sleep(3000); get_task_status(task_id)
-          "RUNNING" -> IO.puts("running..."); :timer.sleep(1000); get_task_status(task_id)
-          _ -> {:error, resp}
-        end
+    case task_status do
+      "PENDING" ->
+        IO.puts("pending...")
+        :timer.sleep(5000)
+        get_task_status(task_id)
+
+      "RUNNING" ->
+        IO.puts("running...")
+        :timer.sleep(3000)
+        get_task_status(task_id)
+
+      "SUCCEEDED" ->
+        {:ok, %{output: %{"results" => [%{"url" => image_url} | _]}}} = resp
+        {:ok, image_url}
+
+      _ ->
+        {:error, resp}
+    end
   end
 
-  defp parse_image_url(
-         {:ok,
-          %{output: %{"results" => [%{"url" => image_url} | _], "task_status" => task_status}}} = resp
-       ) do
-        case task_status do
-          "SUCCEEDED" -> {:ok, image_url}
-          _ -> {:error, resp}
-        end
-  end
+  # defp parse_image_url(
+  #        {:ok,
+  #         %{output: %{"results" => [%{"url" => image_url} | _], "task_status" => task_status}}} = resp
+  #      ) do
+  #       case task_status do
+  #         "SUCCEEDED" -> {:ok, image_url}
+  #         _ -> {:error, resp}
+  #       end
+  # end
 
   defp parse_image_url({:error, _} = raw_resp) do
     raw_resp
