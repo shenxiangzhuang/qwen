@@ -62,6 +62,7 @@ defmodule Qwen.Sigils do
   `sigil_p`(`~p""`, `～p`含义: *P*icture): 利用Elixir的Sigil，按照一定格式输入字符串，自动解析为文生图请求需要的格式
 
   ## 示例
+  ```
   iex> ~p"model: wanx-v1 prompt: 一只奔跑的猫 parameters.style: <chinese painting> parameters.size: 1024x1024 parameters.n: 1 parameters.seed: 42"
   [
     model: "wanx-v1",
