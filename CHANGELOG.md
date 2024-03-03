@@ -20,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 删除`Qwen.generation`(原始格式调用文本生成), 仅保留`Qwen.chat`.
 
 
+### Internal
+- CI增加`mix test`
+
+
 ## [0.1.0] - 2024-02-29
 
 ### Added
