@@ -24,8 +24,19 @@ end
 
 ## 使用
 
+
+### 前期准备
+
+[开通DashScope并创建API-KEY](https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key),
+之后通过`export DASHSCOPE_API_KEY="YOUR_DASHSCOPE_API_KEY"`设置好环境变量。
+
+
+### 文本生成/对话(Chat)
+
+通义千问大语言模型: 输入prompt，输出生成结果。
+
 ```elixir
-iex> import Qwen.Generation
+iex> import Qwen.Sigils
 iex> prompt = ~l"model: qwen-turbo system: 你是一个学贯中西，通晓古今的文学家，给定一些历史上的文人，你能够根据这些人物的特征给出符合人物形象的对话。user: 你是唐代诗人李白，请做一首诗评价一下意大利作家卡尔维诺"
 iex> Qwen.chat(prompt)
 {:ok,
@@ -39,6 +50,27 @@ iex> Qwen.chat(prompt)
 ```
 
 
+### 文生图(Text to Image)
+通义万相文生图模型: 输入prompt，输出生成图片。
+
+```elixir
+iex> image_prompt = ~p"model: wanx-v1 prompt:根据杜甫的《旅夜书怀》做一副富有意境和想象力的画 parameters.style: <chinese painting> parameters.size: 1024*1024 parameters.n: 1 parameters.seed: 42"
+[
+  model: "wanx-v1",
+  input: %{
+    prompt: "根据杜甫的《旅夜书怀》做一副富有意境和想象力的画"
+  },
+  parameters: %{size: "1024*1024", seed: 42, n: 1, style: "<chinese painting>"}
+]
+iex> Qwen.text_to_image(image_prompt, "./旅夜书怀.png")
+Save image to ./旅夜书怀.png
+{:ok, "./旅夜书怀.png"}
+
+```
+
+<p align="center">
+  <img src="./asset/旅夜书怀.png" alt="旅夜书怀" width="600" height="400">
+</p>
 
 ## 致谢
 

@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: MIT
 
 defmodule Qwen.Client do
-  @moduledoc"""
+  @moduledoc """
   Qwen Client
   """
   alias Qwen.Config
@@ -58,11 +58,14 @@ defmodule Qwen.Client do
     end
   end
 
-  def request_headers(config) do
-    [
-      bearer(config),
-      {"Content-type", "application/json"}
-    ]
+  def request_headers(config, dynamic_headers \\ []) do
+    headers =
+      [
+        bearer(config),
+        {"Content-type", "application/json"}
+      ]
+
+    headers ++ dynamic_headers
   end
 
   def bearer(config), do: {"Authorization", "Bearer #{config.api_key || Config.api_key()}"}
@@ -82,14 +85,39 @@ defmodule Qwen.Client do
 
   def query_params(request_options, _params), do: request_options
 
-  def api_post(url, params \\ [], config) do
+  def api_post(url, params \\ [], config, dynamic_headers \\ []) do
     body =
       params
       |> Enum.into(%{})
       |> Jason.encode!()
 
     url
-    |> post(body, request_headers(config), request_options(config))
+    |> post(body, request_headers(config, dynamic_headers), request_options(config))
     |> handle_response()
+  end
+
+  def api_get(url, params \\ [], config) do
+    request_options =
+      config
+      |> request_options()
+      |> query_params(params)
+
+    url
+    |> get(request_headers(config), request_options)
+    |> handle_response()
+  end
+
+  def image_download(image_url, image_path) do
+    %HTTPoison.Response{body: body} = HTTPoison.get!(image_url)
+
+    # Save the image data to the file path
+    case File.write!(image_path, body) do
+      :ok ->
+        IO.puts("Save image to #{image_path}")
+        {:ok, image_path}
+
+      {:error, reason} ->
+        {:error, reason}
+    end
   end
 end
