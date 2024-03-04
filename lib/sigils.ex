@@ -12,8 +12,8 @@ defmodule Qwen.Sigils do
 
   ```elixir
   iex> ~l"model: qwen-turbo
-          system: 你是一个学贯中西，通晓古今的文学家，给定一些历史上的文人，你能够根据这些人物的特征给出符合人物形象的对话。
-          user: 你是唐代诗人李白，请做一首诗评价一下意大利作家卡尔维诺"
+  ...>    system: 你是一个学贯中西，通晓古今的文学家，给定一些历史上的文人，你能够根据这些人物的特征给出符合人物形象的对话。
+  ...>    user: 你是唐代诗人李白，请做一首诗评价一下意大利作家卡尔维诺"
   [
     model: "qwen-turbo",
     input: %{
@@ -38,9 +38,9 @@ defmodule Qwen.Sigils do
 
   ```elixir
   iex> ~l"model: qwen-turbo
-          parameters.result_format: message
-          system: 你是一个学贯中西，通晓古今的文学家，给定一些历史上的文人，你能够根据这些人物的特征给出符合人物形象的对话。
-          user: 你是唐代诗人李白，请做一首诗评价一下意大利作家卡尔维诺"
+  ...>    parameters.result_format: message
+  ...>    system: 你是一个学贯中西，通晓古今的文学家，给定一些历史上的文人，你能够根据这些人物的特征给出符合人物形象的对话。
+  ...>    user: 你是唐代诗人李白，请做一首诗评价一下意大利作家卡尔维诺"
   [
     model: "qwen-turbo",
     input: %{
@@ -69,11 +69,11 @@ defmodule Qwen.Sigils do
   ## 示例
   ```
   iex> ~p"model: wanx-v1
-          prompt: 一只奔跑的猫
-          parameters.style: <chinese painting>
-          parameters.size: 1024*1024
-          parameters.n: 1
-          parameters.seed: 42"
+  ...>    prompt: 一只奔跑的猫
+  ...>    parameters.style: <chinese painting>
+  ...>    parameters.size: 1024*1024
+  ...>    parameters.n: 1
+  ...>    parameters.seed: 42"
   [
     model: "wanx-v1",
     input: %{prompt: "一只奔跑的猫"},
