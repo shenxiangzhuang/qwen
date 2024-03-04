@@ -1,7 +1,7 @@
 defmodule Qwen.MixProject do
   use Mix.Project
 
-  @version "0.2.0"
+  @version "0.2.1"
   @description "Elixir ❤️ 通义千问"
 
   def project do

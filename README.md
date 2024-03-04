@@ -16,7 +16,7 @@
 ```elixir
 def deps do
   [
-    {:qwen, "~> 0.2.0"}
+    {:qwen, "~> 0.2.1"}
   ]
 end
 ```
