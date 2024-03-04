@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+### Fixed
+- 修复文档错误； 优化文档格式(#8)
+
+
 ## [0.2.0] - 2024-03-03
 
 ### Added
