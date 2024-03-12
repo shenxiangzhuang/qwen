@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.2.2] - 2024-03-12
+
+
 ### Changed
 - `Qwen.text_to_image(text)`，不提供`image_path`时默认为`nil`，此时返回`image_url`
 

@@ -83,7 +83,7 @@ Save image to ./旅夜书怀.png
 ```
 
 <p align="center">
-  <img src="./asset/旅夜书怀.png" alt="旅夜书怀" width="600" height="400">
+  <img src="https://github.com/shenxiangzhuang/qwen/blob/master/asset/%E6%97%85%E5%A4%9C%E4%B9%A6%E6%80%80.png?raw=true" alt="旅夜书怀" width="600" height="400">
 </p>
 
 ## 致谢

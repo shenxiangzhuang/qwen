@@ -38,7 +38,6 @@ defmodule Qwen.Image do
     |> get_task_status()
   end
 
-
   def post_async_generation_task(params, config \\ %Config{}) do
     # 固定使用 enable，表明使用异步方式提交作业(文档要求必须使用异步方式)
     dynamic_headers = [
