@@ -11,17 +11,33 @@ defmodule Qwen.Image do
   def post_url(), do: @post_url
   def get_url(), do: @get_url
 
+  @doc """
+  根据`text`生成图片，存储到`image_path`并返回
+  """
   def text_to_image(text, image_path) do
     text |> image_generation(image_path)
   end
 
-  def image_generation(params, image_path, config \\ %Config{}) do
+  @doc """
+  根据`text`生成图片，返回`image_url`
+  """
+  def text_to_image(text) do
+    text |> image_generation
+  end
+
+  def image_generation_save(params, image_path, config \\ %Config{}) do
+    # params -> task_id -> image_url -> image file path
+    image_generation(params, config)
+    |> save_image(image_path)
+  end
+
+  def image_generation(params, config \\ %Config{}) do
     # params -> task_id -> image_url
     post_async_generation_task(params, config)
     |> parse_task_id()
     |> get_task_status()
-    |> save_image(image_path)
   end
+
 
   def post_async_generation_task(params, config \\ %Config{}) do
     # 固定使用 enable，表明使用异步方式提交作业(文档要求必须使用异步方式)

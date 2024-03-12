@@ -42,6 +42,7 @@ defmodule Qwen do
   @doc """
   通义万相: 文生图模型
 
+
   ```elixir
   iex> image_prompt = ~p"model: wanx-v1
   ...>                   prompt:根据杜甫的《旅夜书怀》做一副富有意境和想象力的画
@@ -56,12 +57,18 @@ defmodule Qwen do
     },
     parameters: %{size: "1024*1024", seed: 42, n: 1, style: "<chinese painting>"}
   ]
+  iex> Qwen.text_to_image(image_prompt)
+  {:ok,
+   "https://dashscope-result-sh.oss-cn-shanghai.aliyuncs.com/1d/aa/20240312/3ab595ad/9dc0eec6-a0e9-4a16-b2fd-c01ea1f2f423-1.png?Expires=1710337020&OSSAccessKeyId=LTAI5tQZd8AEcZX6KZV4G8qL&Signature=jN84pIz46ScJeFAkj%2B087KjG0%2Bc%3D"}
   iex> Qwen.text_to_image(image_prompt, "./旅夜书怀.png")
   Save image to ./旅夜书怀.png
   {:ok, "./旅夜书怀.png"}
   ```
   """
-  def text_to_image(text, image_path \\ "./qwen.png") do
-    Image.text_to_image(text, image_path)
+  def text_to_image(text, image_path \\ nil) do
+    case image_path do
+      nil -> Image.text_to_image(text)
+      _ -> Image.text_to_image(text, image_path)
+    end
   end
 end
